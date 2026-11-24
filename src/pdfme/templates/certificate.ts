@@ -1,0 +1,221 @@
+import type { Template } from '@pdfme/common';
+import type { TemplateDefinition } from '../../types';
+
+export const certificateTemplate: Template = {
+  basePdf: {
+    width: 297, // Landscape A4
+    height: 210,
+    padding: [10, 10, 10, 10],
+  },
+  schemas: [
+    [
+      // Outer border
+      {
+        name: 'outerBorder',
+        type: 'rectangle',
+        position: { x: 12, y: 12 },
+        width: 273,
+        height: 186,
+        color: '#f8fafc',
+        borderColor: '#0f172a',
+        borderWidth: 2,
+        readOnly: true,
+      },
+      // Inner thin border
+      {
+        name: 'innerBorder',
+        type: 'rectangle',
+        position: { x: 16, y: 16 },
+        width: 265,
+        height: 178,
+        color: 'transparent',
+        borderColor: '#d97706',
+        borderWidth: 0.8,
+        readOnly: true,
+      },
+      // Organization / Academy Name
+      {
+        name: 'institutionName',
+        type: 'text',
+        position: { x: 25, y: 26 },
+        width: 247,
+        height: 9,
+        fontSize: 14,
+        fontColor: '#b45309',
+        alignment: 'center',
+      },
+      // Title: "CERTIFICATE OF ACHIEVEMENT"
+      {
+        name: 'certTitle',
+        type: 'text',
+        position: { x: 25, y: 39 },
+        width: 247,
+        height: 16,
+        fontSize: 26,
+        fontColor: '#0f172a',
+        alignment: 'center',
+      },
+      // Subtitle
+      {
+        name: 'subtitle',
+        type: 'text',
+        position: { x: 25, y: 58 },
+        width: 247,
+        height: 8,
+        fontSize: 11,
+        fontColor: '#64748b',
+        alignment: 'center',
+        readOnly: true,
+      },
+      // Recipient Name
+      {
+        name: 'recipientName',
+        type: 'text',
+        position: { x: 30, y: 72 },
+        width: 237,
+        height: 18,
+        fontSize: 28,
+        fontColor: '#1d4ed8',
+        alignment: 'center',
+      },
+      // Divider line under recipient
+      {
+        name: 'divider',
+        type: 'line',
+        position: { x: 60, y: 92 },
+        width: 177,
+        height: 0.5,
+        color: '#cbd5e1',
+        readOnly: true,
+      },
+      // Description / Course Title
+      {
+        name: 'courseDescription',
+        type: 'text',
+        position: { x: 40, y: 98 },
+        width: 217,
+        height: 24,
+        fontSize: 12,
+        fontColor: '#334155',
+        alignment: 'center',
+        lineHeight: 1.4,
+      },
+      // Issued Date
+      {
+        name: 'issueDate',
+        type: 'text',
+        position: { x: 35, y: 145 },
+        width: 65,
+        height: 8,
+        fontSize: 10,
+        fontColor: '#1e293b',
+        alignment: 'center',
+      },
+      {
+        name: 'dateLine',
+        type: 'line',
+        position: { x: 35, y: 155 },
+        width: 65,
+        height: 0.4,
+        color: '#94a3b8',
+        readOnly: true,
+      },
+      {
+        name: 'dateLabel',
+        type: 'text',
+        position: { x: 35, y: 157 },
+        width: 65,
+        height: 6,
+        fontSize: 8,
+        fontColor: '#64748b',
+        alignment: 'center',
+        readOnly: true,
+      },
+      // Verification QR Code
+      {
+        name: 'verifyQr',
+        type: 'qrcode',
+        position: { x: 133, y: 134 },
+        width: 30,
+        height: 30,
+      },
+      {
+        name: 'qrLabel',
+        type: 'text',
+        position: { x: 120, y: 166 },
+        width: 56,
+        height: 6,
+        fontSize: 7,
+        fontColor: '#64748b',
+        alignment: 'center',
+        readOnly: true,
+      },
+      // Instructor / Signatory
+      {
+        name: 'instructorName',
+        type: 'text',
+        position: { x: 195, y: 145 },
+        width: 65,
+        height: 8,
+        fontSize: 10,
+        fontColor: '#1e293b',
+        alignment: 'center',
+      },
+      {
+        name: 'sigLine',
+        type: 'line',
+        position: { x: 195, y: 155 },
+        width: 65,
+        height: 0.4,
+        color: '#94a3b8',
+        readOnly: true,
+      },
+      {
+        name: 'sigLabel',
+        type: 'text',
+        position: { x: 195, y: 157 },
+        width: 65,
+        height: 6,
+        fontSize: 8,
+        fontColor: '#64748b',
+        alignment: 'center',
+        readOnly: true,
+      },
+      // Certificate ID footer
+      {
+        name: 'certId',
+        type: 'text',
+        position: { x: 30, y: 182 },
+        width: 237,
+        height: 5,
+        fontSize: 7,
+        fontColor: '#94a3b8',
+        alignment: 'center',
+      },
+    ],
+  ],
+};
+
+export const certificateDefinition: TemplateDefinition = {
+  id: 'certificate',
+  name: 'Certificate of Excellence',
+  description: 'Landscape A4 credential certificate with verification QR code, custom recipient name, and signature blocks.',
+  category: 'Education',
+  template: certificateTemplate,
+  sampleInputs: [
+    {
+      institutionName: 'INTERNATIONAL SOFTWARE ARCHITECTURE INSTITUTE',
+      certTitle: 'CERTIFICATE OF EXCELLENCE',
+      subtitle: 'THIS HONOR IS PROUDLY CONFERRED UPON',
+      recipientName: 'Alexander Vance',
+      courseDescription: 'for successfully completing the advanced masterclass on\nHigh-Performance Distributed Systems & Cloud-Native PDF Workflows\nwith distinction and extraordinary mastery.',
+      issueDate: 'November 23, 2026',
+      dateLabel: 'Date Awarded',
+      verifyQr: 'https://verify.cert-authority.org/check?id=ISAI-2026-9941',
+      qrLabel: 'Scan to verify credential',
+      instructorName: 'Dr. Evelyn Martinez, PhD',
+      sigLabel: 'Program Director & Dean',
+      certId: 'Credential Identifier: ISAI-2026-9941 • Authenticated on Global Blockchain Registry',
+    },
+  ],
+};
